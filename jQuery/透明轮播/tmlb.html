@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./tmlb.css">
+    <script src="./jQuery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <div class="img-box">
+            <a href=""><img src="./img/lunbo1.jpg" alt="" class="first"></a>
+            <a href=""><img src="./img/lunbo2.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo3.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo4.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo5.jpg" alt=""></a>
+        </div>
+        <div class="prev"></div>
+        <div class="next"></div>
+        <div class="dian">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</body>
+<script>
+let imgs = $(".img-box a")
+let box = $(".box")
+let prev = $(".prev")
+let next = $(".next")
+let dians = $(".dian div")
+let index = 0
+
+function run(type = 0){
+    if(type==0){
+        index += 1
+        if(index>=imgs.length){
+            index = 0
+        }
+    }else{
+        index-=1
+        if(index<0){
+            index = imgs.length-1
+        }
+    }
+    imgs.css({
+        zIndex:0,
+        opcity:0
+    }).eq(index).css({
+        zIndex:10,
+        opcity:1
+    })
+    dians.css("background","red").eq(index).css("background","white")
+}
+let t = setInterval(run,3000)    
+
+box.hover(function(){
+    clearInterval(t)
+},function(){
+    t = setInterval(run,3000)    
+})
+
+next.click(function(){
+    run()
+})
+prev.click(function(){
+    run(1)
+})
+
+dians.click(function(){
+    let i = $(this).index()
+    index = i
+    imgs.css({
+        zIndex:0,
+        opcity:0
+    }).eq(index).css({
+        zIndex:10,
+        opcity:1
+    })
+    
+    dians.css("background","red").eq(index).css("background","white")
+    
+})
+
+
+</script>
+</html>

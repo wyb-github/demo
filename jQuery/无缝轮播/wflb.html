@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./wflb.css">
+    <script src="../jQuery.js"></script>
+    <script src="../animate.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <div class="img-box">
+            <a href=""><img src="./img/lunbo1.jpg" alt="" class="first"></a>
+            <a href=""><img src="./img/lunbo2.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo3.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo4.jpg" alt=""></a>
+            <a href=""><img src="./img/lunbo5.jpg" alt=""></a>
+        </div>
+        <div class="prev"></div>
+        <div class="next"></div>
+        <div class="dian">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</body>
+<script>
+let imgs = $(".img-box a")
+let box = $(".box")
+let prev = $(".prev")
+let next = $(".next")
+let dians = $(".dian div")
+
+let prevIndex = nowIndex = 0
+
+imgs.not(":first").css("left","1226px")
+
+function run(type=0){
+
+    if(type==0){
+        nowIndex += 1
+        if(nowIndex>=imgs.length){
+            nowIndex = 0
+        }
+        imgs.eq(nowIndex).css("left","1226px").animate({"left":"0px"},500)
+        imgs.eq(prevIndex).animate({"left":"-1226px"},500)
+        prevIndex = nowIndex
+        dians.css("background","red").eq(nowIndex).css("background","white")
+    }else{
+        nowIndex -= 1
+        if(nowIndex<0){
+            nowIndex = imgs.length-1
+        }
+        imgs.eq(nowIndex).css("left","-1226px").animate({"left":"0"},500)
+        imgs.eq(prevIndex).animate({"left":"1226px"},500)
+        prevIndex = nowIndex
+        dians.css("background","red").eq(nowIndex).css("background","white")
+    }
+}
+let t = setInterval(run,2000)
+
+next.click(function(){
+    run()
+})
+prev.click(function(){
+    run(1)
+})
+
+box.hover(function(){
+    clearInterval(t)
+},function(){
+    t = setInterval(run,2000)
+})
+
+dians.click(function(){
+    let i = $(this).index()
+    nowIndex = i
+    imgs.eq(nowIndex).css("left","1226px").animate({"left":"0px"},500)
+    imgs.eq(prevIndex).animate({"left":"-1226px"},500)
+    prevIndex = nowIndex
+})
+</script>
+</html>

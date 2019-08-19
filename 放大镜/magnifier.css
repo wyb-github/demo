@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0
+}
+#demo {
+    display: block;
+    width: 500px;
+    height: 350px;
+    margin: 50px;
+    position: relative;
+    border: 1px solid #ccc;
+}
+#small-box {
+    position: relative;
+    z-index: 1;
+}
+#float-box {
+display: none;
+width: 160px;
+height: 120px;
+position: absolute;
+background: #ffffcc;
+border: 1px solid #ccc;
+filter: alpha(opacity=50);
+opacity: 0.5;
+}
+#mark {/*应该是把图片放在这个上面，它的透明度为0，是个block*/
+position: absolute;
+display: block;
+width: 500px;
+height: 357px;
+background-color: #fff;
+filter: alpha(opacity=0);/*过滤器，目前只有少数浏览器支持*/
+opacity: 0;
+z-index: 10;
+}
+#big-box {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 600px;
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    z-index: 1;;
+}
+
+#big-box img {
+    position: absolute;
+    z-index: 5;
+}
